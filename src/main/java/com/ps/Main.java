@@ -53,18 +53,23 @@ public class Main {
         }
 
     }
+
+
+    public static void checkoutBook(Book[] collection ){
+        System.out.println("Enter the ID of the book to check out");
+        int bookIDToCheckout = scanner.nextInt();
+        System.out.println("Please enter your name: ");
+        String userName = scanner.nextLine();
+        if (collection[bookIDToCheckout].isCheckedOut()==false) {
+            collection[bookIDToCheckout].setCheckedOut(true);
+            collection[bookIDToCheckout].setIsbn(userName);
+        }
+
+    }
     public static void printCheckedOutBooks(Book[] collection){
         for (int i = 0; i < collection.length; i++) {
             if (collection[i].isCheckedOut()==true) {
                 System.out.println("The Following Book is Checked Out ID " + collection[i].getId()+ " |ISBN: "+collection[i].getIsbn()+ " |Title : " +collection[i].getTitle());
-            }
-            System.out.println("Enter the ID of the book to check out");
-            int bookIDToCheckout = scanner.nextInt();
-            System.out.println("Please enter your name: ");
-           String userName = scanner.nextLine();
-            if (collection[bookIDToCheckout].isCheckedOut()==false) {
-                collection[bookIDToCheckout].setCheckedOut(true);
-                collection[bookIDToCheckout].setIsbn(userName);
             }
 
 

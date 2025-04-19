@@ -6,17 +6,48 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    public static void printMainMenu() {
-        System.out.println("Press 1 To Show Available Books");
-        System.out.println("Press 2 To Show Checked Out Books");
-        System.out.println("Press 3 To Exit- Out Of The Books");
+    public static void printMainMenu(Book[] collection) {
+
+
+        userDisplay();
+        while(true) {
+            System.out.println("choose one of the following options:");
+            int choice = scanner.nextInt();
+
+            switch (choice){
+                case 1:
+                    userDisplay();
+                    break;
+                    case 2:
+                        printAvailableBooks(collection);
+                        break;
+                        case 3:
+                            printCheckedOutBooks(collection);
+                            break;
+                            case 4:
+                                System.out.println("Exiting the application");
+                                return;
+
+            }
+
+        }
+
     }
 
+    public static void userDisplay(){
+
+        System.out.println("Press 1 To go to home page");
+        System.out.println("Press 2 To Show Available Books");
+        System.out.println("Press 3 To Show Checked out Books");
+        System.out.println("Press 4 To Exit Out Of The Application");
+
+
+
+    };
     public static void printAvailableBooks(Book[] collection ) {
         for (int i = 0; i < collection.length; i++) {
             if (collection[i].isCheckedOut()==false) {
                 System.out.println("The Following Book is available ID:  " +collection[i].getId()+ " |ISBN: "+collection[i].getIsbn()+ " |Title : " +collection[i].getTitle());
-
             }
 
         }
@@ -27,10 +58,29 @@ public class Main {
             if (collection[i].isCheckedOut()==true) {
                 System.out.println("The Following Book is Checked Out ID " + collection[i].getId()+ " |ISBN: "+collection[i].getIsbn()+ " |Title : " +collection[i].getTitle());
             }
+            System.out.println("Enter the ID of the book to check out");
+            int bookIDToCheckout = scanner.nextInt();
+            System.out.println("Please enter your name: ");
+           String userName = scanner.nextLine();
+            if (collection[bookIDToCheckout].isCheckedOut()==false) {
+                collection[bookIDToCheckout].setCheckedOut(true);
+                collection[bookIDToCheckout].setIsbn(userName);
+            }
+
+
+
         }
 
     }
-public static void printCheckOutBooks(Book[] collection){}
+public static void checkInBook(Book[] collection){
+    System.out.println("Enter The Id of the Book you want to check in: ");
+        int checkInId= scanner.nextInt();
+        if (collection[checkInId]. isCheckedOut()==true) {
+            collection[checkInId].setCheckedOut(false);
+            collection[checkInId].setCheckedOutTo("");
+        }
+
+}
 
 
     public static void main(String[] args) {
@@ -38,7 +88,6 @@ public static void printCheckOutBooks(Book[] collection){}
 //        System.out.println(book1.getid());
 //        book1.setID(123234);
 //        System.out.println(book1.getid());
-        printMainMenu();
         Book[] collection = new Book[20];
 
 
@@ -64,8 +113,10 @@ public static void printCheckOutBooks(Book[] collection){}
                 collection[19] = new Book(20, "978-1594633669", "The Girl on the Train", true, "Isabel");
 
 
-                printCheckedOutBooks(collection);
-            }
+        printMainMenu(collection);
+
+
+    }
 
 
         }

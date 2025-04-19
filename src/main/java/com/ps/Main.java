@@ -20,6 +20,9 @@ public class Main {
                     break;
                     case 2:
                         printAvailableBooks(collection);
+                        checkoutBook(collection);
+                        printAvailableBooks(collection);
+
                         break;
                         case 3:
                             printCheckedOutBooks(collection);
